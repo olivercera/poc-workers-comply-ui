@@ -1,5 +1,6 @@
 'use server'
-
+import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 const SafetyEquipmentSchema = z.object({
@@ -46,4 +47,7 @@ export async function createWeeklyRecord(formData: FormData) {
     respiratory_protection,
     fall_protection,
   })
+
+  revalidatePath('/')
+  redirect('/')
 }
