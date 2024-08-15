@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { type SafetyEquipment } from '@/app/lib/definitions'
 import { clsx } from 'clsx'
+import { State } from '@/app/lib/actions'
 
 interface Checkbox {
   label: string
@@ -8,7 +9,13 @@ interface Checkbox {
   checked?: boolean
 }
 
-export function Checkbox({ checkboxs }: { checkboxs: Checkbox[] }) {
+export function Checkbox({
+  checkboxs,
+  state,
+}: {
+  checkboxs: Checkbox[]
+  state: State
+}) {
   const [checkedItems, setCheckedItems] = useState<Checkbox[]>(checkboxs)
 
   if (!Array.isArray(checkboxs)) {
@@ -38,15 +45,23 @@ export function Checkbox({ checkboxs }: { checkboxs: Checkbox[] }) {
               onChange={handleChange}
               type="checkbox"
               className="h-4 w-4 rounded"
+              aria-describedby="security-equipment-error"
+              required
             />
           </div>
           <div className="text-sm leading-6">
             <label htmlFor={id} className="font-medium text-gray-900">
               {label}
             </label>
-            {/* <p className="text-gray-500">
-              error
-            </p> */}
+            <div id="customer-error" aria-live="polite" aria-atomic="true">
+              {/* TODO: ERRORS */}
+              {/* {state.errors &&
+                state.errors.typError.map((error: string) => (
+                  <p className="mt-2 text-sm text-red-500" key={error}>
+                    {error}
+                  </p>
+                ))} */}
+            </div>
           </div>
         </div>
       ))}
