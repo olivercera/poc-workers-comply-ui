@@ -62,6 +62,7 @@ export default function Form() {
             height={480}
             width={600}
             screenshotFormat="image/webp"
+            screenshotQuality={0.6}
             ref={webcamRef}
             videoConstraints={{
               facingMode: facingMode,

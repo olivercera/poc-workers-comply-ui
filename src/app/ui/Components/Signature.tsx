@@ -143,7 +143,7 @@ export default function Signature() {
 
   const handleSaveImage = () => {
     if (canvasRef.current) {
-      const dataURL = canvasRef.current.toDataURL()
+      const dataURL = canvasRef.current.toDataURL('image/webp', 0.6)
       if (imageInputRef.current) {
         imageInputRef.current.value = dataURL
       }
