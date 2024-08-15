@@ -8,6 +8,7 @@ import { createWeeklyRecord, State } from '@/app/lib/actions'
 import { safetyEquipment } from '@/app/lib/safetyEquipment'
 import Webcam from 'react-webcam'
 import { useRef, useState } from 'react'
+import Signature from '../Components/Signature'
 
 export default function Form() {
   const initialState: State = { message: '', errors: {} }
@@ -33,7 +34,7 @@ export default function Form() {
   return (
     <form
       action={formAction}
-      className="border p-12 border-gray-900/10 rounded-md bg-white min-w-min md:min-w-[450px]"
+      className="border mt p-12 border-gray-900/10 rounded-md bg-white min-w-min md:min-w-[450px]"
     >
       <div className="space-y-7 border-b border-gray-900/10 pb-4">
         <fieldset>
@@ -52,7 +53,7 @@ export default function Form() {
 
       <input type="hidden" value={imageSrc} name="selfie" required />
 
-      <div className="mt-5">
+      <div className="mt-5 space-y-7 border-b border-gray-900/10 pb-4 mb-5">
         {imageSrc ? (
           <img src={imageSrc}></img>
         ) : (
@@ -67,27 +68,23 @@ export default function Form() {
             }}
           ></Webcam>
         )}
-        <div className='flex mt-5 justify-end space-x-4 "'>
-          <a
-            onClick={Capture}
-            className="flex h-10 items-center rounded-lg bg-blue-500 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:bg-blue-600 aria-disabled:cursor-not-allowed aria-disabled:opacity-50 cursor-pointer select-none"
-          >
+        <div className='flex mt-5 mb-5 justify-end space-x-4 "'>
+          <Button type="button" onClick={Capture}>
             Take Selfie
-          </a>
-          <a
-            onClick={ResetPhoto}
-            className="flex h-10 items-center rounded-lg bg-blue-500 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:bg-blue-600 aria-disabled:cursor-not-allowed aria-disabled:opacity-50 cursor-pointer select-none"
-          >
+          </Button>
+          <Button type="button" onClick={ResetPhoto}>
             Reset
-          </a>
-          <a
-            onClick={ChangeCam}
-            className="flex h-10 items-center rounded-lg bg-blue-500 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:bg-blue-600 aria-disabled:cursor-not-allowed aria-disabled:opacity-50 cursor-pointer select-none"
-          >
+          </Button>
+          <Button type="button" onClick={ChangeCam}>
             Change Camera
-          </a>
+          </Button>
         </div>
       </div>
+      <legend className="text-sm font-semibold leading-6 text-gray-900 mt-6 mb-5">
+        Signature
+      </legend>
+
+      <Signature></Signature>
 
       <div className="mt-6 flex justify-end gap-4">
         <Link
