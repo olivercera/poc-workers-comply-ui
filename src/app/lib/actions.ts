@@ -37,6 +37,8 @@ const SafetyEquipmentSchema = z.object({
   fall_protection: z.coerce.boolean({
     invalid_type_error: 'You need a fall protection.',
   }),
+  signature: z.string(),
+  selfie: z.string(),
 })
 
 export type State = {
@@ -58,7 +60,6 @@ export type State = {
 
 export async function createWeeklyRecord(prevState: State, formData: FormData) {
   const rawFormData = Object.fromEntries(formData.entries())
-  console.log(rawFormData)
   const validatedFields = SafetyEquipmentSchema.safeParse(rawFormData)
 
   if (!validatedFields.success) {
@@ -69,5 +70,5 @@ export async function createWeeklyRecord(prevState: State, formData: FormData) {
   }
 
   revalidatePath('/')
-  redirect('/')
+  redirect('/workers')
 }
