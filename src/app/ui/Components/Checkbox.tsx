@@ -38,6 +38,7 @@ export function Checkbox({
         <div className="relative flex gap-x-3" key={id}>
           <div className="flex h-6 items-center">
             <input
+              required
               id={id}
               name={id}
               checked={checked ?? false}
@@ -46,7 +47,6 @@ export function Checkbox({
               type="checkbox"
               className="h-4 w-4 rounded"
               aria-describedby="security-equipment-error"
-              required
             />
           </div>
           <div className="text-sm leading-6">

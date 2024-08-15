@@ -3,11 +3,6 @@ export type WorkerField = {
   name: string
 }
 
-export interface RecordImage {
-  image: File
-  imageName?: string
-}
-
 export interface SafetyEquipment {
   hard_hat: boolean
   safety_glasses: boolean
@@ -23,9 +18,6 @@ export interface SafetyEquipment {
 }
 
 export interface WeeklyRecord extends SafetyEquipment {
-  id: string
-  worker_id: string
-  selfie: RecordImage
-  signature: RecordImage
-  date: string
+  signature: string
+  selfie: string
 }

@@ -6,9 +6,11 @@ import { Button } from '@/app/ui/Components/Button'
 import { Checkbox } from '@/app/ui/Components/Checkbox'
 import { createWeeklyRecord, State } from '@/app/lib/actions'
 import { safetyEquipment } from '@/app/lib/safetyEquipment'
+import { FormEvent } from 'react'
 import Webcam from 'react-webcam'
 import { useRef, useState } from 'react'
 import Signature from '../Components/Signature'
+import { writeStorage } from '@rehooks/local-storage' //this is temporary
 
 export default function Form() {
   const initialState: State = { message: '', errors: {} }
@@ -31,9 +33,18 @@ export default function Form() {
     setFacingMode(facingMode === 'user' ? 'environment' : 'user')
   }
 
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const formData = new FormData(event.currentTarget)
+    const dataJSON = Object.fromEntries(formData.entries())
+    const dataString = JSON.stringify(dataJSON)
+
+    writeStorage('worker', dataString)
+  }
+
   return (
     <form
       action={formAction}
+      onSubmit={handleSubmit}
       className="border mt p-12 border-gray-900/10 rounded-md bg-white min-w-min md:min-w-[450px]"
     >
       <div className="space-y-7 border-b border-gray-900/10 pb-4">
